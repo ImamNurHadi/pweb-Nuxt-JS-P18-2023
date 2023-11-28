@@ -9,7 +9,7 @@
       <!-- Navbar Links -->
       <ul class="hidden md:flex space-x-6">
         <li><router-link class="text-white hover:text-gray-200" to="/">Home</router-link></li>
-        <li><router-link class="text-white hover:text-gray-200" to="/blogs">Blogs</router-link></li>
+        <li><router-link class="text-white hover:text-gray-200" to="/blogdetail">Blogs</router-link></li>
         <li><router-link class="text-white hover:text-gray-200" to="/menu">About</router-link></li>
       </ul>
 
