@@ -11,24 +11,24 @@
           <div class="tim" v-if="showTim">
             <div class="card">
               <div class="card-details">
-                <p class="text-title">Card title</p>
-                <p class="text-body">Here are the details of the card</p>
+                <p class="text-title">Imam Nurhadi</p>
+                <p class="text-body">Entry Fragger AyoBeliPiscok menggunakan Raze</p>
               </div>
               <button class="card-button">More info</button>
             </div>
   
             <div class="card">
               <div class="card-details">
-                <p class="text-title">Card title</p>
-                <p class="text-body">Here are the details of the card</p>
+                <p class="text-title">M. Arkananta R.T.</p>
+                <p class="text-body">Smoker Idaman Bontang, sering marahin pengguna Raze karena nafsu</p>
               </div>
               <button class="card-button">More info</button>
             </div>
   
             <div class="card">
               <div class="card-details">
-                <p class="text-title">Card title</p>
-                <p class="text-body">Here are the details of the card</p>
+                <p class="text-title">Nur Aazka R. </p>
+                <p class="text-body">KETUPEL GARPIT yang ngide beli pizza DOMINO</p>
               </div>
               <button class="card-button">More info</button>
             </div>
@@ -107,7 +107,7 @@
   
   .card {
     width: 190px;
-    height: 254px;
+    height: auto;
     border-radius: 20px;
     background: #f5f5f5;
     position: relative;
