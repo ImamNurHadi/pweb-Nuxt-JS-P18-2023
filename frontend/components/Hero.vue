@@ -51,7 +51,7 @@
       </div>
 
       <div class="mt-12">
-        <router-link to="/blog"
+        <router-link to="/blogdetail"
           class="bg-primary text-white font-semibold py-3 px-6 rounded-full hover:bg-accent-dark transition duration-300">Explore
           More</router-link>
       </div>
@@ -76,7 +76,7 @@ export default {
       if (this.blogPosts[this.currentIndex]) {
         const content = this.blogPosts[this.currentIndex].content;
         // Use regex to split the content into words and limit to 20 words
-        const truncatedWords = content.split(/\s+/).slice(0, 30).join(' ');
+        const truncatedWords = content.split(/\s+/).slice(0, 35).join(' ');
         return `${truncatedWords}...`;
       }
       return '';

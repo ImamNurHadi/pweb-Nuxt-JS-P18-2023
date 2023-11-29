@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #EEE2DC;">
+  <div style="background-color: #F7F7F7s;">
     <Navbar />
     <div>
       <Hero />

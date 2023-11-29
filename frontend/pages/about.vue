@@ -10,6 +10,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
+      background-color:  #F7F7F7;
     }
   
     .app {

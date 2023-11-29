@@ -1,7 +1,7 @@
 <template>
-  <div class="single-blog container mx-auto">
+  <div class="single-blog container mx-auto mt-5">
     <nuxt-link
-      class="button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      class="button bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
       to="/"
     >
       Back
@@ -12,21 +12,21 @@
         <img
           :src="blogDetails.image"
           :alt="blogDetails.title"
-          class="max-h-96 w-full object-cover rounded shadow-lg"
+          class="max-h-96 w-full object-cover rounded shadow-md"
         />
       </div>
 
       <div class="blog-content w-full lg:w-1/2">
-        <h1 class="text-3xl font-semibold mb-4">{{ blogDetails.title }}</h1>
+        <h1 class="text-3xl font-bold mb-4 text-primary">{{ blogDetails.title }}</h1>
 
         <div class="text-lg mb-4">
-          <p class="mb-2">
+          <p class="mb-2 text-primary">
             <span class="font-semibold">Date:</span> {{ blogDetails.date }}
           </p>
-          <p class="mb-2">
+          <p class="mb-2 text-primary">
             <span class="font-semibold">Writer:</span> {{ blogDetails.writer }}
           </p>
-          <p>
+          <p class="text-primary">
             <span class="font-semibold">Content:</span> {{ blogDetails.fullcontent }}
           </p>
         </div>
@@ -35,6 +35,7 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
@@ -43,21 +44,17 @@ import axios from "axios";
 export default {
   data() {
     return {
-      blogDetails: null, // To store the details of a specific blog
+      blogDetails: null,
     };
   },
-  async mounted() {
-    // Fetch blog details based on the ID from the route params
-    await this.fetchBlogDetails();
+  mounted() {
+    this.fetchBlogDetails();
   },
   methods: {
     async fetchBlogDetails() {
-      const blogId = this.$route.params.id; // Get the blog ID from route params
-
       try {
-        const response = await axios.get(
-          `http://localhost:3100/api/blog/${blogId}`
-        );
+        const blogId = this.$route.params.id;
+        const response = await axios.get(`http://localhost:3100/api/blog/${blogId}`);
         const blogData = response.data;
 
         this.blogDetails = {
@@ -74,3 +71,49 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Add scoped styles here if needed */
+
+/* Color Palette */
+.bg-primary {
+  background-color: #123C69;
+}
+
+.text-primary {
+  color: #123C69;
+}
+
+.bg-accent {
+  background-color: #AC3B61;
+}
+
+.text-accent {
+  color: #AC3B61;
+}
+
+.text-muted {
+  color: #BAB2B5;
+}
+
+/* Responsive Padding */
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Optional: Add a hover effect to scale the button */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+/* Change the background color on hover to red */
+.hover\:bg-red-500:hover {
+  background-color: #AC3B61;
+  /* Red background color */
+}
+</style>
