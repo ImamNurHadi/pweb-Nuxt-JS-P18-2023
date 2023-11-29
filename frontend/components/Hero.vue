@@ -10,16 +10,17 @@
         <transition name="fade" mode="out-in">
           <div :key="currentIndex" class="carousel-item" v-if="blogPosts.length > 0">
             <div class="flex">
-              <div class="w-12 pl-5 pr-5">
+              <div class="w-12 pl-5 pr-5" v-if="blogPosts[currentIndex]">
                 <div class="bg-white rounded-lg overflow-hidden shadow-lg relative h-full">
                   <img :src="blogPosts[currentIndex].image" alt="Article Image"
                     class="w-full h-48 object-cover object-center">
                   <div class="p-4 h-full mb-11">
                     <h2 class="text-xl font-semibold mb-2 text-gray-600">{{ blogPosts[currentIndex].title }}</h2>
-                    <p class="text-gray-600 leading-relaxed">{{ blogPosts[currentIndex].content }}</p>
-                    <a :href="`/blog/${blogPosts[currentIndex].id}`"
-                      class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300">Read
-                      more</a>
+                    <p class="text-gray-600 leading-relaxed">{{ truncatedContent }}</p>
+                    <router-link :to="{ name: 'id', params: { id: blogPosts[currentIndex].id } }"
+                      class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300 ">
+                      Read more
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -31,10 +32,11 @@
                     class="w-full h-48 object-cover object-center">
                   <div class="p-4 h-full mb-11">
                     <h2 class="text-xl text-gray-600 font-semibold mb-2">{{ blogPosts[nextIndex].title }}</h2>
-                    <p class="text-gray-600 leading-relaxed">{{ blogPosts[nextIndex].content }}</p>
-                    <a :href="`/blog/${blogPosts[nextIndex].id}`"
-                      class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300 ">Read
-                      more</a>
+                    <p class="text-gray-600 leading-relaxed">{{ truncatedContent }}</p>
+                    <router-link :to="{ name: 'id', params: { id: blogPosts[nextIndex].id } }"
+                      class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300 ">
+                      Read more
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -70,6 +72,15 @@ export default {
       // Calculate the next index
       return (this.currentIndex + 1) % this.blogPosts.length;
     },
+    truncatedContent() {
+      if (this.blogPosts[this.currentIndex]) {
+        const content = this.blogPosts[this.currentIndex].content;
+        // Use regex to split the content into words and limit to 20 words
+        const truncatedWords = content.split(/\s+/).slice(0, 30).join(' ');
+        return `${truncatedWords}...`;
+      }
+      return '';
+    },
   },
   mounted() {
     // Fetch data from your API
@@ -88,8 +99,7 @@ export default {
             image: post.image,
           }));
 
-          // Start automatic slideshow (uncomment the line below if you want it)
-          // this.startSlideshow();
+          this.startSlideshow();
         } else {
           console.error('API response does not contain an array in the "docs" property:', data);
         }
