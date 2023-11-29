@@ -9,7 +9,6 @@ import { buildConfig } from 'payload/config'
 import Users from './collections/Users'
 import Blog from './collections/Blog'
 import Logs from './collections/Logs'
-import Author from './collections/Author'
 
 export default buildConfig({
   cors : "*",
@@ -18,7 +17,7 @@ export default buildConfig({
     bundler: webpackBundler(),
   },
   editor: slateEditor({}),
-  collections: [Blog, Author, Users, Logs,],
+  collections: [Blog, Users, Logs,],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

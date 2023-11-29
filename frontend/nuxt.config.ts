@@ -8,4 +8,8 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  serverMiddleware: [
+    // Enable CORS for all routes
+    '~/server-middleware/cors.js',
+  ],
 })

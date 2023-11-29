@@ -52,16 +52,25 @@ const Blog = {
       },
     },
     {
+        name: 'image',
+        type: 'text',
+        required: true,
+      },
+    {
       name: 'writer',
-      type: 'relationship',
+      type: 'text',
       required: true,
-      relationTo: 'author',
     },
     {
       name: 'content',
       type: 'textarea',
       required: true,
     },
+    {
+        name: 'fullcontent',
+        type: 'textarea',
+        required: true,
+      },
   ],
 };
 
