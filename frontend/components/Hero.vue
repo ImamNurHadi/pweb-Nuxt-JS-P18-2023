@@ -44,9 +44,13 @@
           </div>
         </transition>
 
-        <div class="carousel-controls mt-2">
-          <button @click="prevSlide" class="text-white">&#8249;</button>
-          <button @click="nextSlide" class="text-white">&#8250;</button>
+        <div class="carousel-controls mt-3 flex items-center">
+          <button @click="prevSlide" class="carousel-button">
+            <span class="text-white">&#8249;</span>
+          </button>
+          <button @click="nextSlide" class="carousel-button">
+            <span class="text-white">&#8250;</span>
+          </button>
         </div>
       </div>
 
@@ -222,5 +226,27 @@ export default {
 
 .carousel-item a:hover {
   background-color: #AC3B61 !important;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-button {
+  background-color: #123C69; /* Accent color */
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.8rem;
+  margin: 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.carousel-button:hover {
+  background-color: #BF5069; /* Darker shade for hover effect */
 }
 </style>
