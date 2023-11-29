@@ -2,18 +2,13 @@
   <div class="single-blog container mx-auto mt-5">
     <nuxt-link
       class="button bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
-      to="/"
-    >
+      to="/">
       Back
     </nuxt-link>
 
     <div v-if="blogDetails" class="blog-info flex flex-col lg:flex-row items-center lg:items-start gap-8 mt-8">
       <div class="blog-img w-full lg:w-1/2">
-        <img
-          :src="blogDetails.image"
-          :alt="blogDetails.title"
-          class="max-h-96 w-full object-cover rounded shadow-md"
-        />
+        <img :src="blogDetails.image" :alt="blogDetails.title" class="max-h-96 w-full object-cover rounded shadow-md" />
       </div>
 
       <div class="blog-content w-full lg:w-1/2">
@@ -21,7 +16,7 @@
 
         <div class="text-lg mb-4">
           <p class="mb-2 text-primary">
-            <span class="font-semibold">Date:</span> {{ blogDetails.date }}
+            <span class="font-semibold">Date:</span> {{ formatDate(blogDetails.date) }}
           </p>
           <p class="mb-2 text-primary">
             <span class="font-semibold">Writer:</span> {{ blogDetails.writer }}
@@ -67,6 +62,10 @@ export default {
       } catch (error) {
         console.error("Error fetching blog details:", error);
       }
+    },
+    formatDate(date) {
+      // Implement your preferred date formatting logic
+      return new Date(date).toLocaleDateString();
     },
   },
 };
