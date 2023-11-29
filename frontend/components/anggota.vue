@@ -58,6 +58,7 @@
   display: flex;
   flex-direction: column;
   padding: 5vh;
+  margin-top: 5vh;
   margin-bottom: 10vh;
   width: 70%;
   height: auto;
