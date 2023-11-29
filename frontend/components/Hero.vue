@@ -1,32 +1,57 @@
 <template>
-  <div :style="{ backgroundImage: 'url(https://picsum.photos/id/16/2500/1667/)', height: 'calc(100vh - 64px)' }" class="bg-primary text-white py-16 bg-cover bg-center relative">
+  <div :style="{ backgroundImage: 'url(https://picsum.photos/id/16/2500/1667/)', height: 'calc(100vh - 64px)' }"
+    class="bg-primary text-white py-16 bg-cover bg-center relative">
     <div class="absolute inset-0 bg-black opacity-50"></div>
     <div class="container mx-auto text-center relative z-10">
       <h1 class="text-4xl font-bold mb-4">Welcome to Our Blog</h1>
       <p class="text-lg">Discover the latest trends and insightful articles on our blog.</p>
-      
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg relative">
-          <img src="https://via.placeholder.com/400x250" alt="Article Image" class="w-full h-48 object-cover object-center">
-          <div class="p-4">
-            <h2 class="text-xl font-semibold mb-2">Article Title 1</h2>
-            <p class="text-gray-600 leading-relaxed">Brief description of the article content. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="#" class="block absolute bottom-0 left-0 w-full bg-accent text-white text-center font-semibold py-2 hover:bg-accent-dark transition duration-300">Read more</a>
+
+      <div class="carousel-container mt-12">
+        <transition name="fade" mode="out-in">
+          <div :key="currentIndex" class="carousel-item" v-if="blogPosts.length > 0">
+            <div class="flex">
+              <div class="w-12 pl-5 pr-5">
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg relative h-full">
+                  <img :src="blogPosts[currentIndex].image" alt="Article Image"
+                    class="w-full h-48 object-cover object-center">
+                  <div class="p-4 h-full mb-11">
+                    <h2 class="text-xl font-semibold mb-2 text-gray-600">{{ blogPosts[currentIndex].title }}</h2>
+                    <p class="text-gray-600 leading-relaxed">{{ blogPosts[currentIndex].content }}</p>
+                    <a :href="`/blog/${blogPosts[currentIndex].id}`"
+                      class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300">Read
+                      more</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-12 pr-5 pl-5">
+                <div v-if="nextIndex < blogPosts.length"
+                  class="bg-white rounded-lg overflow-hidden shadow-lg relative h-full">
+                  <img :src="blogPosts[nextIndex].image" alt="Article Image"
+                    class="w-full h-48 object-cover object-center">
+                  <div class="p-4 h-full mb-11">
+                    <h2 class="text-xl text-gray-600 font-semibold mb-2">{{ blogPosts[nextIndex].title }}</h2>
+                    <p class="text-gray-600 leading-relaxed">{{ blogPosts[nextIndex].content }}</p>
+                    <a :href="`/blog/${blogPosts[nextIndex].id}`"
+                      class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300 ">Read
+                      more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg relative">
-          <img src="https://via.placeholder.com/400x250" alt="Article Image" class="w-full h-48 object-cover object-center">
-          <div class="p-4">
-            <h2 class="text-xl font-semibold mb-2">Article Title 2</h2>
-            <p class="text-gray-600 leading-relaxed">Brief description of the article content. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-            <a href="#" class="block absolute bottom-0 left-0 w-full bg-accent text-white text-center font-semibold py-2 hover:bg-accent-dark transition duration-300">Read more</a>
-          </div>
+        </transition>
+
+        <div class="carousel-controls mt-2">
+          <button @click="prevSlide" class="text-white">&#8249;</button>
+          <button @click="nextSlide" class="text-white">&#8250;</button>
         </div>
       </div>
-      
+
       <div class="mt-12">
-        <a href="/blog" class="bg-accent text-white font-semibold py-3 px-6 rounded-full hover:bg-accent-dark transition duration-300">Explore More</a>
+        <router-link to="/blog"
+          class="bg-primary text-white font-semibold py-3 px-6 rounded-full hover:bg-accent-dark transition duration-300">Explore
+          More</router-link>
       </div>
     </div>
   </div>
@@ -34,12 +59,61 @@
 
 <script>
 export default {
-  name: 'Hero',
+  data() {
+    return {
+      blogPosts: [],
+      currentIndex: 0,
+    };
+  },
+  computed: {
+    nextIndex() {
+      // Calculate the next index
+      return (this.currentIndex + 1) % this.blogPosts.length;
+    },
+  },
+  mounted() {
+    // Fetch data from your API
+    fetch('http://localhost:3100/api/blog/')
+      .then(response => response.json())
+      .then(data => {
+        // Check if 'docs' property is an array
+        if (Array.isArray(data.docs)) {
+          // Update the blogPosts data property with the fetched data
+          this.blogPosts = data.docs.map(post => ({
+            id: post.id,
+            title: post.title,
+            content: post.content,
+            date: post.date,
+            writer: post.writer,
+            image: post.image,
+          }));
+
+          // Start automatic slideshow (uncomment the line below if you want it)
+          // this.startSlideshow();
+        } else {
+          console.error('API response does not contain an array in the "docs" property:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  },
+  methods: {
+    startSlideshow() {
+      setInterval(this.nextSlide, 5000); // Change slide every 5 seconds (adjust as needed)
+    },
+    nextSlide() {
+      this.currentIndex = (this.currentIndex + 1) % this.blogPosts.length;
+    },
+    prevSlide() {
+      this.currentIndex = (this.currentIndex - 1 + this.blogPosts.length) % this.blogPosts.length;
+    },
+  },
 };
 </script>
 
-<style scoped>
 
+<style scoped>
 .bg-primary {
   background-color: #123C69;
 }
@@ -113,5 +187,30 @@ export default {
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.carousel-container {
+  position: relative;
+}
+
+.carousel-item {
+  display: inline-block;
+  width: 100%;
+}
+
+.w-12 {
+  width: 50%;
+}
+
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
+.carousel-item a:hover {
+  background-color: #AC3B61 !important;
 }
 </style>
