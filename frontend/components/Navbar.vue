@@ -27,7 +27,10 @@
       </div>
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" style="">
+          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" style="border-radius: 127px;
+background: linear-gradient(315deg, #cacaca, #f0f0f0);
+box-shadow:  -5px -5px 0px #9f9f9f,
+             5px 5px 0px #ffffff;">
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
@@ -53,7 +56,10 @@
         <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
           <span class="absolute -inset-1.5"></span>
           <span class="sr-only">Open user menu</span>
-          <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+          <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" style="border-radius: 127px;
+background: #e0e0e0;
+box-shadow:  5px 5px 10px #9f9f9f,
+             -5px -5px 10px #ffffff;">
         </button>
       </div>
 
@@ -112,7 +118,6 @@ export default {
 
 /* Navbar Background Color */
 nav {
-  margin-bottom: 5vh;
   background-color: #123C69;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
