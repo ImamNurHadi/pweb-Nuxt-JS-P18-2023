@@ -1,7 +1,7 @@
 <template>
     <div>
       <Navbar />
-      <header class="blog-header mt-8" :style="{ backgroundImage: 'url(https://media.giphy.com/media/Id71NFYfSBOKv2IexE/giphy-downsized-large.gif)' }">
+      <header class="blog-header" :style="{ backgroundImage: 'url(https://media.giphy.com/media/Id71NFYfSBOKv2IexE/giphy-downsized-large.gif)' }">
         <div class="header-content">
           <h1>Discover Our Latest Blogs</h1>
           <p>Stay informed and inspired with our diverse collection of articles.</p>
