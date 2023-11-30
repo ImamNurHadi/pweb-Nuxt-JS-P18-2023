@@ -1,28 +1,31 @@
 <template>
-    <div>
-      <section class="container mx-auto my-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div v-for="post in blogPosts" :key="post.id" class="rounded-lg overflow-hidden shadow-md h-full">
-            <div class="bg-primary relative h-full flex flex-col">
-              <img :src="post.image" alt="Blog Post Image" class="w-full h-64 object-cover">
-              <div class="p-4 flex-grow flex flex-col justify-between">
-                <div>
-                  <h2 class="text-xl font-bold mb-2 text-white">{{ post.title }}</h2>
+  <div>
+    <section class="container mx-auto my-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-for="post in blogPosts" :key="post.id" class="rounded-lg overflow-hidden shadow-md h-full">
+          <div class="bg-primary relative h-full flex flex-col">
+            <img :src="post.image" alt="Blog Post Image" class="w-full h-64 object-cover">
+            <div class="p-4 flex-grow flex flex-col justify-between">
+              <div>
+                <h2 class="text-xl font-bold mb-2 text-white">{{ post.title }}</h2>
+                <div class="post-content-container flex-grow">
                   <p class="text-white rounded mb-5">{{ truncateContent(post.content) }}</p>
-                  <router-link v-if="post.content.length > 20" :to="{ name: 'id', params: { id: post.id } }"
-                    class="inline-block mx-auto mt-2 px-3 py-1 text-white border border-white hover:bg-red-500 transition duration-300 ease-in-out transform hover:scale-105 text-sm rounded-full">Read
-                    More</router-link>
                 </div>
-                <div>
-                  <p class="text-muted mt-2">{{ post.writer }} - {{ formatDate(post.date) }}</p>
-                </div>
+              </div>
+              <div class="flex flex-col items-start mt-2">
+                <router-link v-if="post.content.length > 20" :to="{ name: 'id', params: { id: post.id } }"
+                  class="inline-block px-3 py-1 text-white border border-white hover:bg-red-500 transition duration-300 ease-in-out transform hover:scale-105 text-sm rounded-full">Read
+                  More</router-link>
+                <p class="text-muted">{{ post.writer }} - {{ formatDate(post.date) }}</p>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
-  </template>
+      </div>
+    </section>
+  </div>
+</template>
+
   
   <script>
   export default {
@@ -65,7 +68,7 @@
       truncateContent(content) {
         const words = content.split(' ');
         if (words.length > 20) {
-          return words.slice(0, 20).join(' ') + '...';
+          return words.slice(0, 35).join(' ') + '...';
         }
         return content;
       },
@@ -77,6 +80,12 @@
   /* Add scoped styles here if needed */
   
   /* Color Palette */
+
+  .post-content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .bg-primary {
     background-color: #123C69;
   }

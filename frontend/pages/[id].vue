@@ -1,8 +1,9 @@
 <template>
+  <div class="flex flex-col min-h-screen">
   <div class="single-blog container mx-auto mt-5">
     <nuxt-link
       class="button bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
-      to="/">
+      to="/blogdetail">
       Back
     </nuxt-link>
 
@@ -31,6 +32,7 @@
     </div>
   </div>
   <Footer />
+</div>
 </template>
 
 <script>
@@ -75,6 +77,10 @@ export default {
 /* Add scoped styles here if needed */
 
 /* Color Palette */
+
+.single-blog {
+  flex-grow: 1;
+}
 .bg-primary {
   background-color: #123C69;
 }
