@@ -16,7 +16,7 @@
                     class="w-full h-48 object-cover object-center">
                   <div class="p-4 h-full mb-11">
                     <h2 class="text-xl font-semibold mb-2 text-gray-600">{{ blogPosts[currentIndex].title }}</h2>
-                    <p class="text-gray-600 leading-relaxed">{{ nextTruncatedContent }}</p>
+                    <p class="text-gray-600 leading-relaxed">{{ truncatedContent }}</p>
                     <router-link :to="{ name: 'id', params: { id: blogPosts[currentIndex].id } }"
                       class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300 ">
                       Read more
@@ -32,7 +32,7 @@
                     class="w-full h-48 object-cover object-center">
                   <div class="p-4 h-full mb-11">
                     <h2 class="text-xl text-gray-600 font-semibold mb-2">{{ blogPosts[nextIndex].title }}</h2>
-                    <p class="text-gray-600 leading-relaxed">{{ truncatedContent }}</p>
+                    <p class="text-gray-600 leading-relaxed">{{ nextTruncatedContent }}</p>
                     <router-link :to="{ name: 'id', params: { id: blogPosts[nextIndex].id } }"
                       class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300 ">
                       Read more

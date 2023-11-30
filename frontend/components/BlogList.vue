@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div v-for="post in blogPosts" :key="post.id" class="rounded-lg overflow-hidden shadow-md h-full">
             <div class="bg-primary relative h-full flex flex-col">
-              <img :src="post.image" alt="Blog Post Image" class="w-full h-48 object-cover">
+              <img :src="post.image" alt="Blog Post Image" class="w-full h-64 object-cover">
               <div class="p-4 flex-grow flex flex-col justify-between">
                 <div>
                   <h2 class="text-xl font-bold mb-2 text-white">{{ post.title }}</h2>
