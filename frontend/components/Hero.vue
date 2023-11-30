@@ -16,7 +16,7 @@
                     class="w-full h-48 object-cover object-center">
                   <div class="p-4 h-full mb-11">
                     <h2 class="text-xl font-semibold mb-2 text-gray-600">{{ blogPosts[currentIndex].title }}</h2>
-                    <p class="text-gray-600 leading-relaxed">{{ truncatedContent }}</p>
+                    <p class="text-gray-600 leading-relaxed">{{ nextTruncatedContent }}</p>
                     <router-link :to="{ name: 'id', params: { id: blogPosts[currentIndex].id } }"
                       class="block absolute bottom-0 left-0 w-full bg-primary text-white text-center font-semibold py-2 hover:bg-accent transition duration-300 ">
                       Read more
@@ -77,13 +77,10 @@ export default {
       return (this.currentIndex + 1) % this.blogPosts.length;
     },
     truncatedContent() {
-      if (this.blogPosts[this.currentIndex]) {
-        const content = this.blogPosts[this.currentIndex].content;
-        // Use regex to split the content into words and limit to 20 words
-        const truncatedWords = content.split(/\s+/).slice(0, 35).join(' ');
-        return `${truncatedWords}...`;
-      }
-      return '';
+      return this.getContent(this.currentIndex);
+    },
+    nextTruncatedContent() {
+      return this.getContent(this.nextIndex);
     },
   },
   mounted() {
@@ -121,6 +118,15 @@ export default {
     },
     prevSlide() {
       this.currentIndex = (this.currentIndex - 1 + this.blogPosts.length) % this.blogPosts.length;
+    },
+    getContent(index) {
+      if (this.blogPosts[index]) {
+        const content = this.blogPosts[index].content;
+        // Use regex to split the content into words and limit to 20 words
+        const truncatedWords = content.split(/\s+/).slice(0, 35).join(' ');
+        return `${truncatedWords}...`;
+      }
+      return '';
     },
   },
 };
