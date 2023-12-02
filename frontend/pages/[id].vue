@@ -1,12 +1,6 @@
 <template>
   <div class="flex flex-col min-h-screen">
   <div class="single-blog container mx-auto mt-5">
-    <nuxt-link
-      class="button bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
-      to="/blogdetail">
-      Back
-    </nuxt-link>
-
     <div v-if="blogDetails" class="blog-info flex flex-col lg:flex-row items-center lg:items-start gap-8 mt-8">
       <div class="blog-img w-full lg:w-1/2">
         <img :src="blogDetails.image" :alt="blogDetails.title" class="max-h-96 w-full object-cover rounded shadow-md" />
@@ -29,6 +23,21 @@
 
         <!-- Add any additional content or styling here -->
       </div>
+    </div>
+    <div class="flex justify-center mt-8 mb-8">
+      <nuxt-link
+        class="button bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
+        to="/"
+      >
+        Back to Home
+      </nuxt-link>
+
+      <nuxt-link
+        class="button bg-primary hover:bg-red-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105 ml-4"
+        to="/blogdetail"
+      >
+        Back to Blog List
+      </nuxt-link>
     </div>
   </div>
   <Footer />

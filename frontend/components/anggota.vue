@@ -10,9 +10,10 @@
           <div class="card" v-for="(teamMember, index) in teamMembers" :key="index">
             <div class="card-details">
               <p class="text-title">{{ teamMember.name }}</p>
+              <p class="text-body">{{ teamMember.nrp }}</p>
               <p class="text-body">{{ teamMember.description }}</p>
             </div>
-            <button class="card-button">More info</button>
+            <button class="card-button" @click="openInstagramProfile(teamMember.instagram)">More info</button>
           </div>
         </div>
       </div>
@@ -80,7 +81,7 @@ button:active {
 }
 
 .card {
-  width: 190px;
+  width: 250px;
   height: auto;
   border-radius: 20px;
   background: #f5f5f5;
@@ -93,6 +94,9 @@ button:active {
   flex-direction: column;
   justify-content: space-between;
   margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-details {
@@ -100,10 +104,10 @@ button:active {
   gap: 0.5em;
   display: grid;
   place-content: center;
+  margin-bottom: 1rem; /* Add margin to create space between text and button */
 }
 
 .card-button {
-  transform: translateX(-50%) translateY(100%);
   width: 60%;
   border-radius: 1rem;
   border: none;
@@ -111,13 +115,11 @@ button:active {
   color: #fff;
   font-size: 1rem;
   padding: 0.5rem 1rem;
-  position: absolute;
-  left: 50%;
-  bottom: 1rem;
-  opacity: 0;
-  transition: 0.3s ease-out;
+  /* Remove the 'position: absolute' and 'bottom: 1rem' properties */
+  margin-top: 10px;
+  align-self: center; /* Center the button horizontally */
+  text-align: center; /* Center the text inside the button */
 }
-
 .text-body {
   color: #868686;
 }
@@ -152,15 +154,20 @@ export default {
     return {
       showTim: false,
       teamMembers: [
-        { name: 'Imam Nurhadi', description: 'Entry Fragger AyoBeliPiscok menggunakan Raze' },
-        { name: 'M. Arkananta R.T.', description: 'Smoker Idaman Bontang, sering marahin pengguna Raze karena nafsu' },
-        { name: 'Nur Aazka R.', description: 'KETUPEL GARPIT yang ngide beli pizza DOMINO' },
+        { name: 'Imam Nurhadi', description: 'Entry Fragger AyoBeliPiscok menggunakan Raze', nrp: '5027221046', instagram: 'ara_its'},
+        { name: 'M. Arkananta R.T.', description: 'Smoker Idaman Bontang, sering marahin pengguna Raze karena nafsu', nrp: '5027221003', instagram: 'ara_its' },
+        { name: 'Nur Aazka R.', description: 'KETUPEL GARPIT yang ngide beli pizza DOMINO', nrp: '5027221064', instagram: 'ara_its' },
       ],
     };
   },
   methods: {
     toggleTim() {
       this.showTim = !this.showTim;
+    },
+    openInstagramProfile(username) {
+      // Assuming the Instagram username is provided in the 'username' parameter
+      const url = `https://www.instagram.com/${username}/`;
+      window.open(url, '_blank');
     },
   },
 };

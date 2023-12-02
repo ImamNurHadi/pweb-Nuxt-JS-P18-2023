@@ -56,7 +56,7 @@
 
       <div class="mt-12">
         <router-link to="/blogdetail"
-          class="bg-primary text-white font-semibold py-3 px-6 rounded-full hover:bg-accent-dark transition duration-300">Explore
+          class="bg-primary text-white font-semibold py-3 px-6 rounded-full hover:bg-accent">Explore
           More</router-link>
       </div>
     </div>

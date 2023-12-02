@@ -45,7 +45,7 @@ export default {
   },
   created() {
   // Fetch data from your API
-  fetch('http://localhost:3100/api/salah/')
+  fetch('http://localhost:3100/api/blog/')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
