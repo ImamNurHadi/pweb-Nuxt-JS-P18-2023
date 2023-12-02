@@ -23,58 +23,72 @@
         </div>
       </div>
     </section>
+
+    <!-- Error Handling -->
+    <div v-if="error" class="container mx-auto my-16">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-accent">Oops! Something went wrong.</h2>
+        <p class="text-primary">{{ error }}</p>
+        <router-link to="/" class="inline-block mt-4 px-3 py-1 text-white bg-primary border border-white hover:bg-red-500 transition duration-300 ease-in-out transform hover:scale-105 text-sm rounded-full">Back to Home</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
-  
-  <script>
-  export default {
-    data() {
-      return {
-        blogPosts: [],
-      };
-    },
-    created() {
-      // Fetch data from your API
-      fetch('http://localhost:3100/api/blog/')
-        .then(response => response.json())
-        .then(data => {
-          // Check if 'docs' property is an array
-          if (Array.isArray(data.docs)) {
-            // Update the blogPosts data property with the fetched data
-            this.blogPosts = data.docs.map(post => ({
-              id: post.id, // Use the appropriate property name from your API response
-              title: post.title,
-              content: post.content,
-              date: post.date,
-              writer: post.writer, // Assuming this is the author's name
-              image: post.image, // Update this based on your API response
-            }));
-          } else {
-            console.error('API response does not contain an array in the "docs" property:', data);
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    },
-  
-    methods: {
-      // Add a method to format the date
-      formatDate(date) {
-        // Implement your preferred date formatting logic
-        return new Date(date).toLocaleDateString();
-      },
-      truncateContent(content) {
-        const words = content.split(' ');
-        if (words.length > 20) {
-          return words.slice(0, 35).join(' ') + '...';
+<script>
+export default {
+  data() {
+    return {
+      blogPosts: [],
+      error: null,
+    };
+  },
+  created() {
+    // Fetch data from your API
+    fetch('http://localhost:3100/api/blo/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return content;
-      },
+        return response.json();
+      })
+      .then(data => {
+        // Check if 'docs' property is an array
+        if (Array.isArray(data.docs)) {
+          // Update the blogPosts data property with the fetched data
+          this.blogPosts = data.docs.map(post => ({
+            id: post.id,
+            title: post.title,
+            content: post.content,
+            date: post.date,
+            writer: post.writer,
+            image: post.image,
+          }));
+        } else {
+          console.error('API response does not contain an array in the "docs" property:', data);
+          this.error = 'Invalid data format from the server.';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        this.error = 'Failed to fetch data from the server.';
+      });
+  },
+
+  methods: {
+    formatDate(date) {
+      return new Date(date).toLocaleDateString();
     },
-  };
-  </script>
+    truncateContent(content) {
+      const words = content.split(' ');
+      if (words.length > 20) {
+        return words.slice(0, 35).join(' ') + '...';
+      }
+      return content;
+    },
+  },
+};
+</script>
   
   <style scoped>
   /* Add scoped styles here if needed */
