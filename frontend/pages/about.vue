@@ -1,8 +1,11 @@
 <template>
+  <div class="flex flex-col min-h-screen">
     <div class="app">
       <Navbar />
       <anggota />
     </div>
+    <Footer />
+  </div>
   </template>
   
   <style>
